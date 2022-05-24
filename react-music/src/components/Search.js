@@ -10,7 +10,6 @@ const Search = ({ getDataToRender, liftDataToApp }) => {
   const [appData, setAppData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [idArtist, setIdArtist] = useState("");
-  const [artistDataId, setArtistDataId] = useState(null);
 
   const debouncedSearch = useDebounce(searchQuery, 1500);
 

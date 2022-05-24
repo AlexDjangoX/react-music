@@ -12,9 +12,14 @@ import "./App.css";
 
 function App() {
   const [appData, setAppData] = useState(null);
+  const [favoriteAlbumArt, setFavoriteAlbumArt] = useState(null);
 
   const liftDataToApp = (data) => {
     setAppData(data);
+  };
+
+  const liftFavoriteAlbumArt = (data) => {
+    setFavoriteAlbumArt(data);
   };
 
   return (
@@ -22,8 +27,24 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<Main liftDataToApp={liftDataToApp} />} />
-          <Route path="/favorites" element={<Favorites />} />
-          <Route path="/album-arts" element={<AlbumArt appData={appData} />} />
+          <Route
+            path="/favorites"
+            element={
+              <Favorites
+                favoriteAlbumArt={favoriteAlbumArt}
+                setFavoriteAlbumArt={setFavoriteAlbumArt}
+              />
+            }
+          />
+          <Route
+            path="/album-arts"
+            element={
+              <AlbumArt
+                appData={appData}
+                liftFavoriteAlbumArt={liftFavoriteAlbumArt}
+              />
+            }
+          />
           <Route path="*" element={<Navigate replace to="/" />} />
         </Routes>
       </main>
@@ -32,9 +53,3 @@ function App() {
 }
 
 export default App;
-
-// const [artisId, setArtistId] = useState(null);
-
-//   const retrieveArtistId = (id) => {
-//     setArtistId(id);
-//   };
