@@ -7,7 +7,7 @@ import Modal from "./Modal";
 
 const Main = ({ liftDataToApp }) => {
   const [dataToRender, setDataToRender] = useState(null);
-  const [modal, setModal] = useState(true);
+  const [modal, setModal] = useState(false);
 
   const getDataToRender = (data) => {
     setDataToRender(data);

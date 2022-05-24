@@ -23,7 +23,10 @@ const AlbumArt = ({ appData }) => {
   return (
     <>
       <Header />
-      <div className="search-bar-left">
+      <div>
+        {!albumArt && (
+          <h3>Navigate Back to Search. Search for Artist. Select Album Art</h3>
+        )}
         {isLoading && albumArt && (
           <div className="left-search-bar">
             <Grid.Container gap={2}>
@@ -42,7 +45,7 @@ const AlbumArt = ({ appData }) => {
                 <p>
                   <strong>
                     {" "}
-                    <em>{item.strAlbumStripped.slice(0, 16)}</em>
+                    <em>{item.strAlbumStripped.slice(0, 20)}</em>
                   </strong>
                 </p>
               </figcaption>

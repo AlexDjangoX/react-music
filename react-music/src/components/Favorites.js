@@ -1,7 +1,7 @@
 import React from "react";
-
+import Header from "./Header";
 const Favorites = () => {
-  return <div>Favorites are in Favorites.js</div>;
+  return <Header />;
 };
 
 export default Favorites;

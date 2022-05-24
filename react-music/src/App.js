@@ -17,8 +17,6 @@ function App() {
     setAppData(data);
   };
 
-  if (appData) console.log("20...", appData.artists[0].idArtist);
-
   return (
     <Router>
       <main>
