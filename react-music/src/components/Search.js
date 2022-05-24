@@ -3,38 +3,43 @@ import { Loading, Grid } from "@nextui-org/react";
 import useDebounce from "./hooks/useDebounce";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-
 import "./Search.css";
 
-const Search = ({ getDataToRender }) => {
+const Search = ({ getDataToRender, liftDataToApp }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [appData, setAppData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [idArtist, setIdArtist] = useState("");
+  const [artistDataId, setArtistDataId] = useState(null);
 
   const debouncedSearch = useDebounce(searchQuery, 1500);
 
   const inputChangeHandler = (event) => {
     const { value } = event.target;
-    setSearchQuery(value);
+    const formatValue = value.split(" ").join("_");
+    setSearchQuery(formatValue);
   };
 
   useEffect(() => {
     setIsLoading(true);
-    async function fetchDataFromApi() {
+    async function fetchDataFromApi(query) {
       const response = await fetch(
-        `https://www.theaudiodb.com/api/v1/json/2/search.php?s=${debouncedSearch}`
+        `https://www.theaudiodb.com/api/v1/json/523532/search.php?s=${query}`
       );
-      const data = await response.json();
-      setAppData(data);
-      getDataToRender(data);
+      const data = await response.json().catch((error) => console.log(error));
+      if (data) {
+        setAppData(data);
+        getDataToRender(data);
+        liftDataToApp(data);
+        setIdArtist(data.artists[0].idArtist);
+      }
 
       setIsLoading(false);
     }
-    if (debouncedSearch) fetchDataFromApi(searchQuery);
-  }, [searchQuery, debouncedSearch]);
+    if (debouncedSearch) fetchDataFromApi(debouncedSearch);
+  }, [debouncedSearch]);
 
   console.log(appData);
-
   const onSubmitHandler = (event) => {
     event.preventDefault();
     setSearchQuery("");
@@ -61,7 +66,7 @@ const Search = ({ getDataToRender }) => {
               placeholder="Search"
               className="search-field"
               onChange={inputChangeHandler}
-              value={searchQuery}
+              value={searchQuery.split("_").join(" ")}
             />
             <button
               type="submit"

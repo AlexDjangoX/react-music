@@ -29,9 +29,13 @@ const Header = () => {
           <Link to="/favorites">Favorites</Link>
         </Button>
         <Spacer y={0.5} />
-        <Button color="black">Medium</Button>
+        <Button color="black">
+          <Link to="/album-arts">Album Art</Link>
+        </Button>
         <Spacer y={0.5} />
-        <Button color="black">Medium</Button>
+        <Button color="black">
+          <Link to="/">Back to Search</Link>
+        </Button>
         <Spacer y={0.5} />
       </div>
     </div>

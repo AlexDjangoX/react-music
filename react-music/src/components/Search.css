@@ -2,8 +2,7 @@
   display: grid;
   grid-template-areas: "left search-bar right";
   grid-template-columns: 6rem 1fr 6rem;
-  grid-template-rows: 6rem;
-  padding: 2rem;
+  grid-template-rows: 4.5rem;
 }
 
 .search-bar {
